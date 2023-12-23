@@ -56,7 +56,6 @@ fun SettingsScreen(navController: NavController) {
         })
     }) { innerPadding ->
         var password by remember { mutableStateOf(TextFieldValue("")) }
-        var username by remember { mutableStateOf(TextFieldValue("")) }
 
         Column(
             modifier = Modifier
