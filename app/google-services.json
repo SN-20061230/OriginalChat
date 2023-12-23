@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847155969743",
+    "project_id": "originalchat-cdd81",
+    "storage_bucket": "originalchat-cdd81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847155969743:android:ee0f369a72d6bd54a101ba",
+        "android_client_info": {
+          "package_name": "com.example.originalchat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuQyC4BSH_vzJq2M9dDxkIwU4HY0QGN9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
