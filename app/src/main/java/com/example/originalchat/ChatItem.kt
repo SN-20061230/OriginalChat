@@ -29,11 +29,11 @@ fun ChatItem(name: String, navController: NavController) {
             }) {
         Icon(
             imageVector = Icons.Default.Person,
-            contentDescription = "Person Icon",
+            contentDescription = "Icon",
             Modifier.size(32.dp),
             tint = Color.White,
         )
         Text(fontSize = 24.sp, text = name, color = Color.White)
     }
-    Divider(modifier = Modifier.fillMaxWidth(), thickness = 2.dp, color = Color(108, 120, 131))
+    Divider(modifier = Modifier.fillMaxWidth(), thickness = 2.dp, color = Color.Green)
 }
