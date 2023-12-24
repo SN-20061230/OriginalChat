@@ -32,7 +32,7 @@ fun MessageItem(msg: String, time: String, position: Boolean) {
                         .padding(horizontal = 10.dp, vertical = 5.dp)
                 ) {
                     Text(
-                        modifier = Modifier.background(Color(43, 82, 120)),
+                        modifier = Modifier.background(Color(43, 72, 180)),
                         fontSize = 25.sp,
                         text = msg,
                         color = Color.White,
@@ -49,7 +49,7 @@ fun MessageItem(msg: String, time: String, position: Boolean) {
             Column(horizontalAlignment = Alignment.Start) {
                 Surface(
                     modifier = Modifier
-                        .background(Color(48, 37, 51), RoundedCornerShape(33))
+                        .background(Color(24, 37, 51), RoundedCornerShape(33))
                         .padding(horizontal = 10.dp, vertical = 5.dp)
                 ) {
                     Text(

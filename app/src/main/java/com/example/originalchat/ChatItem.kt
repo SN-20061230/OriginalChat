@@ -3,8 +3,10 @@ package com.example.chat_app
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Divider
@@ -22,8 +24,9 @@ import com.example.chat_app.Navigation.Screens
 fun ChatItem(name: String, navController: NavController) {
     Row(
         Modifier
-            .fillMaxWidth()
+
             .padding(17.dp)
+            .width(150.dp)
             .clickable {
                 navController.navigate(route = Screens.Chat.getFullRoute(name = name))
             }) {
@@ -35,5 +38,5 @@ fun ChatItem(name: String, navController: NavController) {
         )
         Text(fontSize = 24.sp, text = name, color = Color.White)
     }
-    Divider(modifier = Modifier.fillMaxWidth(), thickness = 2.dp, color = Color.Green)
+    Divider(modifier = Modifier.height(10.dp), thickness = 2.dp, color = Color.Green)
 }
