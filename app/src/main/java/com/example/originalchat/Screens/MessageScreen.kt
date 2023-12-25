@@ -35,9 +35,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Main
+import com.example.chat_app.Database.Data
 import com.example.chat_app.Database.Message
-import com.example.chat_app.MessageItem
+import com.example.originalchat.Database.MessageItem
 
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -47,7 +47,7 @@ fun ChatScreen(name: String, navController: NavController) {
     var msg by remember { mutableStateOf(TextFieldValue("")) }
     val context = LocalContext.current
     var messages by remember { mutableStateOf(emptyList<Message>()) }
-    Main.getMessages(name, Main.getSavedUser(context)) { list ->
+    Data.getMessages(name, Data.getSavedUser(context)) { list ->
         messages = list
     }
     Scaffold(containerColor = Color(41, 38, 43), topBar = {
@@ -86,8 +86,8 @@ fun ChatScreen(name: String, navController: NavController) {
                 modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
             ) {
                 IconButton(onClick = {
-                    Main.sendMessage(Main.getSavedUser(context), name, msg.text)
-                    Main.getMessages(name, Main.getSavedUser(context)) { list ->
+                    Data.sendMessage(Data.getSavedUser(context), name, msg.text)
+                    Data.getMessages(name, Data.getSavedUser(context)) { list ->
                         messages = list
                     }
                     msg = TextFieldValue()
@@ -113,7 +113,7 @@ fun ChatScreen(name: String, navController: NavController) {
                         MessageItem(
                             msg = it1,
                             time = it2,
-                            position = item.from == Main.getSavedUser(context)
+                            position = item.from == Data.getSavedUser(context)
                         )
                     }
                 }

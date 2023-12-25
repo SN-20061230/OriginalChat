@@ -1,4 +1,4 @@
-package com.example.chat_app
+package com.example.originalchat.Database
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

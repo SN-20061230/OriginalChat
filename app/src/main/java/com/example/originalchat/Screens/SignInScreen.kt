@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,7 +26,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Main
+import com.example.chat_app.Database.Data
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +37,7 @@ fun SignInScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(41, 38, 43)),
+            .background(Color(65, 38, 43)),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -57,6 +58,7 @@ fun SignInScreen(navController: NavController) {
             },
             label = { Text(text = "Your Username", color = Color.White) },
             placeholder = { Text(text = "Username", color = Color.White) },
+            shape = RoundedCornerShape(12.dp)
         )
         OutlinedTextField(
             modifier = Modifier
@@ -69,26 +71,27 @@ fun SignInScreen(navController: NavController) {
             },
             label = { Text(text = "Your Password", color = Color.White) },
             placeholder = { Text(text = "Password", color = Color.White) },
+            shape = RoundedCornerShape(12.dp)
         )
         Button(modifier = Modifier.padding(top = 27.dp), onClick = {
-            Main.getUser(username, password) { result ->
+            Data.getUser(username, password) { result ->
                 Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                 if (result == "Successful Login") {
-                    Main.saveUser(context, username.text)
+                    Data.saveUser(context, username.text)
                     navController.navigate("Home")
                 }
             }
         }) {
             Text(
                 modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp),
-                text = "Submit",
+                text = "Sign In",
                 fontSize = 19.sp
             )
         }
         Button(colors = ButtonDefaults.buttonColors(containerColor = Color(14, 22, 33)), onClick = {
             navController.navigate("SignUp")
         }) {
-            Text(text = "Do not have an account", fontSize = 17.sp)
+            Text(text = "Or Register. If you don't have account", fontSize = 14.sp)
         }
     }
 }

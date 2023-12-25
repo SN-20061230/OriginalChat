@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,7 +26,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Main
+import com.example.chat_app.Database.Data
 import com.example.chat_app.Database.User
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,6 +72,7 @@ fun SignUpScreen(navController: NavController) {
             },
             label = { Text(text = "Your Full Name", color = Color.White) },
             placeholder = { Text(text = "Full Name", color = Color.White) },
+            shape = RoundedCornerShape(12.dp)
         )
         OutlinedTextField(
             modifier = Modifier
@@ -83,16 +85,17 @@ fun SignUpScreen(navController: NavController) {
             },
             label = { Text(text = "Your Password", color = Color.White) },
             placeholder = { Text(text = "Password", color = Color.White) },
+            shape = RoundedCornerShape(12.dp)
         )
         Button(modifier = Modifier.padding(top = 27.dp), onClick = {
             if (" " in username.text) {
                 Toast.makeText(context, "Username can not contain spaces", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                Main.checkUser(username.text) {
+                Data.checkUser(username.text) {
                     if (it) {
-                        Main.createUser(User(fullname.text, username.text, password.text))
-                        Main.saveUser(context, username.text)
+                        Data.createUser(User(fullname.text, username.text, password.text))
+                        Data.saveUser(context, username.text)
                         navController.navigate("Home")
                     } else {
                         Toast.makeText(
@@ -104,7 +107,7 @@ fun SignUpScreen(navController: NavController) {
         }) {
             Text(
                 modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp),
-                text = "Submit",
+                text = "Sign Up",
                 fontSize = 19.sp
             )
         }

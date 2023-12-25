@@ -17,7 +17,7 @@ import com.example.chat_app.Screens.SplashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AppNavigation(navController: NavHostController) {
+fun NavigationFile(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screens.Splash.route) {
         composable(route = Screens.Splash.route) {
             SplashScreen(navController)

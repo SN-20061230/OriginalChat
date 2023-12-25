@@ -1,8 +1,7 @@
-package com.example.chat_app
+package com.example.originalchat.Database
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,7 +20,7 @@ import androidx.navigation.NavController
 import com.example.chat_app.Navigation.Screens
 
 @Composable
-fun ChatItem(name: String, navController: NavController) {
+fun Item(name: String, navController: NavController) {
     Row(
         Modifier
 
@@ -38,5 +37,5 @@ fun ChatItem(name: String, navController: NavController) {
         )
         Text(fontSize = 24.sp, text = name, color = Color.White)
     }
-    Divider(modifier = Modifier.height(10.dp), thickness = 2.dp, color = Color.Green)
+    Divider(modifier = Modifier.height(5.dp), thickness = 2.dp, color = Color.Green)
 }

@@ -5,12 +5,9 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,12 +22,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.chat_app.ChatItem
-import com.example.chat_app.Database.Main
+import com.example.chat_app.Database.Data
+import com.example.originalchat.Database.Item
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,7 +34,7 @@ import com.example.chat_app.Database.Main
 fun HomeScreen(navController: NavController) {
     var users by remember { mutableStateOf<List<String>>(emptyList()) }
     val context = LocalContext.current
-    Main.getUsers { list ->
+    Data.getUsers { list ->
         users = list
     }
 
@@ -50,13 +46,13 @@ fun HomeScreen(navController: NavController) {
         ), title = {
             IconButton(onClick = { navController.navigate("Settings") }) {
                 Icon(
-                    imageVector = Icons.Default.Settings,
+                    imageVector = Icons.Default.AccountBox,
                     contentDescription = "Settings Icon",
                     tint = Color(108, 120, 131),
                 )
 
             }
-            Text(Main.getSavedUser(context), color = Color.White, modifier = Modifier.padding(start = 150.dp, top = 10.dp))
+            Text(text = "Current: " + Data.getSavedUser(context), color = Color.White, modifier = Modifier.padding(start = 150.dp, top = 10.dp))
 
         })
     }) { innerPadding ->
@@ -67,8 +63,11 @@ fun HomeScreen(navController: NavController) {
                 .padding(innerPadding),
         ) {
             items(users) { item ->
-                ChatItem(name = item, navController)
+                Item(name = item, navController)
             }
         }
+
+
+
     }
 }

@@ -30,7 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Main
+import com.example.chat_app.Database.Data
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +51,7 @@ fun SettingsScreen(navController: NavController) {
                         tint = Color.White,
                     )
                 }
-                Text(Main.getSavedUser(context), color = Color.White)
+                Text(Data.getSavedUser(context), color = Color.White)
             }
         })
     }) { innerPadding ->
@@ -85,7 +85,7 @@ fun SettingsScreen(navController: NavController) {
                 placeholder = { Text(text = "Password", color = Color.White) },
             )
             Button(modifier = Modifier.padding(top = 10.dp), onClick = {
-                Main.setPassword(Main.getSavedUser(context), password.text)
+                Data.setPassword(Data.getSavedUser(context), password.text)
                 Toast.makeText(context, "Password changed successfully", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "Change")
@@ -93,10 +93,10 @@ fun SettingsScreen(navController: NavController) {
             Button(modifier = Modifier.padding(top = 5.dp),
                 colors = ButtonDefaults.buttonColors(Color.Red),
                 onClick = {
-                    Main.saveUser(context, "")
+                    Data.saveUser(context, "")
                     navController.navigate("SignIn")
                 }) {
-                Text(text = "Log Out from system")
+                Text(text = "Log out from system")
             }
         }
     }

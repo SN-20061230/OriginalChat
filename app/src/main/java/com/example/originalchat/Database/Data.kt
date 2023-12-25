@@ -12,40 +12,26 @@ import com.google.firebase.database.ValueEventListener
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-data class Message(
-    val from: String?,
-    val to: String?,
-    val msg: String?,
-    val date: String?,
-) {
-    constructor() : this(null, null, null, null)
-}
 
-data class User(
-    val fullname: String?,
-    var username: String?,
-    var password: String?,
-) {
-    constructor() : this(null, null, null)
-}
 
-class Main {
+class Data {
     companion object {
         private val users = FirebaseDatabase.getInstance().reference.child("users")
         private val messages = FirebaseDatabase.getInstance().reference.child("messages")
 
+
+
+        fun getSavedUser(context: Context): String {
+            val sharedPreferences: SharedPreferences =
+                context.getSharedPreferences("db", Context.MODE_PRIVATE)
+            return sharedPreferences.getString("user", "") ?: ""
+        }
         fun saveUser(context: Context, user: String) {
             val sharedPreferences: SharedPreferences =
                 context.getSharedPreferences("db", Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putString("user", user)
             editor.apply()
-        }
-
-        fun getSavedUser(context: Context): String {
-            val sharedPreferences: SharedPreferences =
-                context.getSharedPreferences("db", Context.MODE_PRIVATE)
-            return sharedPreferences.getString("user", "") ?: ""
         }
 
         fun setPassword(user: String, password: String) {
@@ -67,9 +53,7 @@ class Main {
 
 
 
-        fun createUser(user: User) {
-            users.child(user.username!!).setValue(user)
-        }
+
 
         fun checkUser(user: String, callback: (Boolean) -> Unit) {
             users.child(user).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -118,7 +102,9 @@ class Main {
                 }
             })
         }
-
+        fun createUser(user: User) {
+            users.child(user.username!!).setValue(user)
+        }
         @RequiresApi(Build.VERSION_CODES.O)
         fun sendMessage(from: String, to: String, msg: String) {
             val currentDateTime = LocalDateTime.now()
@@ -150,4 +136,21 @@ class Main {
             })
         }
     }
+}
+
+data class Message(
+    val from: String?,
+    val to: String?,
+    val msg: String?,
+    val date: String?,
+) {
+    constructor() : this(null, null, null, null)
+}
+
+data class User(
+    val fullname: String?,
+    var username: String?,
+    var password: String?,
+) {
+    constructor() : this(null, null, null)
 }
