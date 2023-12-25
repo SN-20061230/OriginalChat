@@ -26,7 +26,7 @@ fun Item(name: String, navController: NavController) {
         Modifier
 
             .padding(17.dp)
-            .width(150.dp)
+            .width(200.dp)
             .clickable {
                 navController.navigate(route = Screens.Chat.getFullRoute(name = name))
             }) {

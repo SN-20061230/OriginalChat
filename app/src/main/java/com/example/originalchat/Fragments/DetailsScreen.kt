@@ -94,50 +94,6 @@ fun SettingsScreen(navController: NavController) {
             }) {
                 Text(text = "Change")
             }
-
-        }
-
-
-
-
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 10.dp, vertical = 180.dp)
-                .padding(innerPadding),
-        ) {
-            Text(
-                modifier = Modifier.padding(top = 10.dp),
-                text = "Change Username",
-                color = Color.White
-            )
-
-
-            OutlinedTextField(
-                colors = androidx.compose.material3.TextFieldDefaults.outlinedTextFieldColors(
-                    textColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 5.dp),
-                value = username,
-                onValueChange = {
-                    username = it
-                },
-                label = { Text(text = "Your New Username", color = Color.White) },
-                placeholder = { Text(text = "Username", color = Color.White) },
-                shape = RoundedCornerShape(12.dp)
-
-
-            )
-            Button(modifier = Modifier.padding(top = 10.dp, start = 150.dp), onClick = {
-                Data.SetUsername(Data.getSavedUser(context), username.text)
-                Toast.makeText(context, "Username changed successfully", Toast.LENGTH_SHORT).show()
-            }) {
-                Text(text = "Change")
-            }
-
             Button(modifier = Modifier.padding(top = 5.dp,  start = 110.dp),
                 colors = ButtonDefaults.buttonColors(Color.Red),
                 onClick = {
@@ -148,6 +104,15 @@ fun SettingsScreen(navController: NavController) {
             }
 
         }
+
+
+
+
+
+
+
+
+
 
 
 

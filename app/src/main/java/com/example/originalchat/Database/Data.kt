@@ -52,22 +52,7 @@ class Data {
         }
 
 
-        fun SetUsername(user: String, username: String?) {
-            users.child(user).addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val changedUser = dataSnapshot.getValue(User::class.java)
-                    if (changedUser != null) {
-                        changedUser.username = username
 
-                    }
-
-                    users.child(user).setValue(changedUser)
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                }
-            })
-        }
 
 
         fun checkUser(user: String, callback: (Boolean) -> Unit) {
