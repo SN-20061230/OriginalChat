@@ -4,11 +4,17 @@ import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,18 +36,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.chat_app.Database.Data
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun DetailsScreen(navController: NavController) {
     val context = LocalContext.current
-    Scaffold(containerColor = Color(41, 38, 43), topBar = {
+    Scaffold(containerColor = Color.White, topBar = {
         TopAppBar(colors = TopAppBarDefaults.smallTopAppBarColors(
             containerColor = Color(
-                41, 38, 43
+                50, 165, 234
             )
         ), title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -55,7 +62,30 @@ fun SettingsScreen(navController: NavController) {
                 Text(Data.getSavedUser(context), color = Color.White)
             }
         })
-    }) { innerPadding ->
+    },
+        bottomBar = {
+            BottomAppBar(containerColor = Color(40, 143, 238)) {
+
+
+//                Row(modifier = Modifier.fillMaxWidth().height(80.dp)){
+
+
+
+
+
+                IconButton(modifier = Modifier.fillMaxSize(), onClick = { navController.navigate("Home") }) {
+                    Icon(
+                        imageVector = Icons.Default.Home,
+                        contentDescription = "Home Icon",
+                        tint = Color(235, 231, 139),
+                        modifier = Modifier.width(50.dp).height(50.dp)
+                    )
+
+                }
+
+            }
+        }
+        ) { innerPadding ->
         var password by remember { mutableStateOf(TextFieldValue("")) }
         var username by remember { mutableStateOf(TextFieldValue("")) }
         Column(
@@ -67,13 +97,14 @@ fun SettingsScreen(navController: NavController) {
             Text(
                 modifier = Modifier.padding(top = 10.dp),
                 text = "Change Password",
-                color = Color.White
+
+                color = Color(50, 165, 234)
             )
 
 
             OutlinedTextField(
                 colors = androidx.compose.material3.TextFieldDefaults.outlinedTextFieldColors(
-                    textColor = Color.White
+                    textColor =Color(50, 165, 234)
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -82,25 +113,25 @@ fun SettingsScreen(navController: NavController) {
                 onValueChange = {
                     password = it
                 },
-                label = { Text(text = "Your New Password", color = Color.White) },
-                placeholder = { Text(text = "Password", color = Color.White) },
+                label = { Text(text = "Your New Password", color = Color(50, 165, 234)) },
+                placeholder = { Text(text = "Password", color = Color(50, 165, 234)) },
                 shape = RoundedCornerShape(12.dp)
 
 
             )
-            Button(modifier = Modifier.padding(top = 10.dp, start = 150.dp), onClick = {
+            Button(modifier = Modifier.padding(top = 10.dp, start = 115.dp), onClick = {
                 Data.setPassword(Data.getSavedUser(context), password.text)
                 Toast.makeText(context, "Password changed successfully", Toast.LENGTH_SHORT).show()
             }) {
-                Text(text = "Change")
+                Text(text = "Change", fontSize = 20.sp)
             }
-            Button(modifier = Modifier.padding(top = 5.dp,  start = 110.dp),
+            Button(modifier = Modifier.padding(top = 5.dp,  start = 60.dp),
                 colors = ButtonDefaults.buttonColors(Color.Red),
                 onClick = {
                     Data.saveUser(context, "")
                     navController.navigate("SignIn")
                 }) {
-                Text(text = "Log out from system")
+                Text(text = "Log out from system", fontSize = 20.sp)
             }
 
         }

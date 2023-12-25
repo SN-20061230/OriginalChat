@@ -1,4 +1,4 @@
-package com.example.originalchat.Database
+package com.example.originalchat
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -25,15 +26,15 @@ fun Item(name: String, navController: NavController) {
     Row(
         Modifier
 
-            .padding(17.dp)
+            .padding(15.dp)
             .width(200.dp)
             .clickable {
                 navController.navigate(route = Screens.Chat.getFullRoute(name = name))
             }) {
         Icon(
-            imageVector = Icons.Default.AccountBox,
-            contentDescription = "Account",
-            Modifier.size(32.dp),
+            imageVector = Icons.Default.AccountCircle,
+            contentDescription = "Account Image",
+            Modifier.size(40.dp),
             tint = Color.White,
 
         )

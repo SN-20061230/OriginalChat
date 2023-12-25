@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.chat_app.Database.Data
-import com.example.chat_app.Database.User
+import com.example.originalchat.Database.User
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +39,7 @@ fun SignUpScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(41, 38, 43)),
+            .background(Color(160, 205, 230)),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -60,6 +60,8 @@ fun SignUpScreen(navController: NavController) {
             },
             label = { Text(text = "Your Username", color = Color.White) },
             placeholder = { Text(text = "Username", color = Color.White) },
+            shape = RoundedCornerShape(12.dp)
+
         )
         OutlinedTextField(
             modifier = Modifier

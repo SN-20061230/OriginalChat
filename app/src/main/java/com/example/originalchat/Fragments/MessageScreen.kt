@@ -21,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -31,13 +32,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.chat_app.Database.Data
-import com.example.chat_app.Database.Message
-import com.example.originalchat.Database.MessageItem
+import com.example.originalchat.Database.Message
+import com.example.originalchat.MessageItem
 
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -50,10 +55,10 @@ fun ChatScreen(name: String, navController: NavController) {
     Data.getMessages(name, Data.getSavedUser(context)) { list ->
         messages = list
     }
-    Scaffold(containerColor = Color(41, 38, 43), topBar = {
+    Scaffold(containerColor = Color.White, topBar = {
         TopAppBar(colors = TopAppBarDefaults.smallTopAppBarColors(
             containerColor = Color(
-                23, 33, 43
+                40, 143, 238
             )
         ), title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -68,19 +73,27 @@ fun ChatScreen(name: String, navController: NavController) {
             }
         })
     }, bottomBar = {
-        BottomAppBar(containerColor = Color(23, 33, 43)) {
+        BottomAppBar(containerColor = Color(40, 143, 238)) {
             OutlinedTextField(
-                colors = androidx.compose.material3.TextFieldDefaults.outlinedTextFieldColors(
-                    textColor = Color.White
-                ),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Blue,
+                    unfocusedBorderColor = White,
+                    textColor = Color.White,
+                    placeholderColor = Color.White,
+                    focusedLabelColor = White,
+                    unfocusedLabelColor = White
+                    ),
                 value = msg,
                 onValueChange = {
                     msg = it
                 },
-                label = { Text(text = "Your Message") },
+                modifier = Modifier.padding(start = 15.dp),
+                label = { Text(text = "Message") },
                 placeholder = { Text(text = "Message") },
 
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+
+
             )
             Box(
                 modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
@@ -96,7 +109,8 @@ fun ChatScreen(name: String, navController: NavController) {
                         modifier = Modifier.size(35.dp),
                         imageVector = Icons.Default.Send,
                         contentDescription = "Send Icon",
-                        tint = Color(108, 120, 131),
+                        tint = Color.Blue,
+
                     )
                 }
             }

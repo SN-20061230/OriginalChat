@@ -1,10 +1,13 @@
 package com.example.chat_app.Database
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.ui.text.input.TextFieldValue
+import com.example.originalchat.Database.Message
+import com.example.originalchat.Database.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -98,7 +101,7 @@ class Data {
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    callback("Database Error")
+                    callback("Error")
                 }
             })
         }
@@ -108,7 +111,7 @@ class Data {
         @RequiresApi(Build.VERSION_CODES.O)
         fun sendMessage(from: String, to: String, msg: String) {
             val currentDateTime = LocalDateTime.now()
-            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+            val formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")
             val formattedDateTime = currentDateTime.format(formatter)
             val data = Message(from, to, msg, formattedDateTime)
             messages.push().setValue(data)
@@ -116,10 +119,11 @@ class Data {
 
         fun getMessages(chat: String, user: String, callback: (List<Message>) -> Unit) {
             messages.addValueEventListener(object : ValueEventListener {
+                @SuppressLint("SuspiciousIndentation")
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val messages = mutableListOf<Message>()
-                    val children = dataSnapshot.children
-                    children.forEach {
+
+                        dataSnapshot.children.forEach {
                         val message = it.getValue(Message::class.java)
                         if (message != null) {
                             if ((message.from == chat && message.to == user) || (message.from == user && message.to == chat)) {
@@ -138,19 +142,3 @@ class Data {
     }
 }
 
-data class Message(
-    val from: String?,
-    val to: String?,
-    val msg: String?,
-    val date: String?,
-) {
-    constructor() : this(null, null, null, null)
-}
-
-data class User(
-    val fullname: String?,
-    var username: String?,
-    var password: String?,
-) {
-    constructor() : this(null, null, null)
-}

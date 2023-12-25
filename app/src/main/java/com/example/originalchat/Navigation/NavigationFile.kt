@@ -9,8 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.chat_app.Screens.ChatScreen
+import com.example.chat_app.Screens.DetailsScreen
 import com.example.chat_app.Screens.HomeScreen
-import com.example.chat_app.Screens.SettingsScreen
 import com.example.chat_app.Screens.SignInScreen
 import com.example.chat_app.Screens.SignUpScreen
 import com.example.chat_app.Screens.SplashScreen
@@ -32,7 +32,7 @@ fun NavigationFile(navController: NavHostController) {
             SignUpScreen(navController)
         }
         composable(route = Screens.Settings.route) {
-            SettingsScreen(navController)
+            DetailsScreen(navController)
         }
         composable(route = Screens.Chat.route, arguments = listOf(navArgument(NAME_KEY) {
             type = NavType.StringType

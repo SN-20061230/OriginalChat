@@ -37,7 +37,7 @@ fun SignInScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(65, 38, 43)),
+            .background(Color(160, 205, 230)),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -91,7 +91,7 @@ fun SignInScreen(navController: NavController) {
         Button(colors = ButtonDefaults.buttonColors(containerColor = Color(14, 22, 33)), onClick = {
             navController.navigate("SignUp")
         }) {
-            Text(text = "Or Register. If you don't have account", fontSize = 14.sp)
+            Text(text = "Don't have an account", fontSize = 17.sp)
         }
     }
 }
