@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -30,12 +31,14 @@ fun Item(name: String, navController: NavController) {
                 navController.navigate(route = Screens.Chat.getFullRoute(name = name))
             }) {
         Icon(
-            imageVector = Icons.Default.Person,
-            contentDescription = "Icon",
+            imageVector = Icons.Default.AccountBox,
+            contentDescription = "Account",
             Modifier.size(32.dp),
             tint = Color.White,
+
         )
-        Text(fontSize = 24.sp, text = name, color = Color.White)
+        Text(fontSize = 24.sp, text = name, color = Color.White,
+            modifier = Modifier.padding(start = 15.dp)
+            )
     }
-    Divider(modifier = Modifier.height(5.dp), thickness = 2.dp, color = Color.Green)
 }

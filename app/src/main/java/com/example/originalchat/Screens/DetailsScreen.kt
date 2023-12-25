@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -56,7 +57,7 @@ fun SettingsScreen(navController: NavController) {
         })
     }) { innerPadding ->
         var password by remember { mutableStateOf(TextFieldValue("")) }
-
+        var username by remember { mutableStateOf(TextFieldValue("")) }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -83,14 +84,61 @@ fun SettingsScreen(navController: NavController) {
                 },
                 label = { Text(text = "Your New Password", color = Color.White) },
                 placeholder = { Text(text = "Password", color = Color.White) },
+                shape = RoundedCornerShape(12.dp)
+
+
             )
-            Button(modifier = Modifier.padding(top = 10.dp), onClick = {
+            Button(modifier = Modifier.padding(top = 10.dp, start = 150.dp), onClick = {
                 Data.setPassword(Data.getSavedUser(context), password.text)
                 Toast.makeText(context, "Password changed successfully", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "Change")
             }
-            Button(modifier = Modifier.padding(top = 5.dp),
+
+        }
+
+
+
+
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp, vertical = 180.dp)
+                .padding(innerPadding),
+        ) {
+            Text(
+                modifier = Modifier.padding(top = 10.dp),
+                text = "Change Username",
+                color = Color.White
+            )
+
+
+            OutlinedTextField(
+                colors = androidx.compose.material3.TextFieldDefaults.outlinedTextFieldColors(
+                    textColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 5.dp),
+                value = username,
+                onValueChange = {
+                    username = it
+                },
+                label = { Text(text = "Your New Username", color = Color.White) },
+                placeholder = { Text(text = "Username", color = Color.White) },
+                shape = RoundedCornerShape(12.dp)
+
+
+            )
+            Button(modifier = Modifier.padding(top = 10.dp, start = 150.dp), onClick = {
+                Data.SetUsername(Data.getSavedUser(context), username.text)
+                Toast.makeText(context, "Username changed successfully", Toast.LENGTH_SHORT).show()
+            }) {
+                Text(text = "Change")
+            }
+
+            Button(modifier = Modifier.padding(top = 5.dp,  start = 110.dp),
                 colors = ButtonDefaults.buttonColors(Color.Red),
                 onClick = {
                     Data.saveUser(context, "")
@@ -98,6 +146,10 @@ fun SettingsScreen(navController: NavController) {
                 }) {
                 Text(text = "Log out from system")
             }
+
         }
+
+
+
     }
 }
