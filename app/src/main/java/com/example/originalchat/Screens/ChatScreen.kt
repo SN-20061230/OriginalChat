@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Send
@@ -78,6 +79,8 @@ fun ChatScreen(name: String, navController: NavController) {
                 },
                 label = { Text(text = "Your Message") },
                 placeholder = { Text(text = "Message") },
+
+                shape = RoundedCornerShape(12.dp)
             )
             Box(
                 modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
