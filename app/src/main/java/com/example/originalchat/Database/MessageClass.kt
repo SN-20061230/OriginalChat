@@ -1,6 +1,6 @@
 package com.example.originalchat.Database
 
-data class Message(
+data class MessageClass(
     val from: String?,
     val to: String?,
     val msg: String?,

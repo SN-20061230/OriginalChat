@@ -27,8 +27,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Data
-import com.example.originalchat.Database.User
+import com.example.chat_app.Database.UserData
+import com.example.originalchat.Database.UserClass
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -113,13 +113,13 @@ fun SignUpScreen(navController: NavController) {
         )
         Button(modifier = Modifier.padding(top = 27.dp), onClick = {
             if (" " in username.text) {
-                Toast.makeText(context, "Username can not contain spaces", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "There is not any spaces left ", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                Data.checkUser(username.text) {
+                UserData.Usercheck(username.text) {
                     if (it) {
-                        Data.createUser(User(fullname.text, username.text, password.text))
-                        Data.saveUser(context, username.text)
+                        UserData.UserCreate(UserClass(fullname.text, username.text, password.text))
+                        UserData.UserSave(context, username.text)
                         navController.navigate("Home")
                     } else {
                         Toast.makeText(

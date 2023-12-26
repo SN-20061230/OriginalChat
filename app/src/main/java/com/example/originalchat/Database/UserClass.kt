@@ -1,7 +1,7 @@
 package com.example.originalchat.Database
 
 
-data class User(
+data class UserClass(
     val fullname: String?,
     var username: String?,
     var password: String?,

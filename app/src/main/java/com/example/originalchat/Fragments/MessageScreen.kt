@@ -33,15 +33,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
-import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Data
-import com.example.originalchat.Database.Message
+import com.example.chat_app.Database.UserData
+import com.example.originalchat.Database.MessageClass
+import com.example.originalchat.Database.MessageData
 import com.example.originalchat.MessageItem
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -51,8 +50,8 @@ import com.example.originalchat.MessageItem
 fun ChatScreen(name: String, navController: NavController) {
     var msg by remember { mutableStateOf(TextFieldValue("")) }
     val context = LocalContext.current
-    var messages by remember { mutableStateOf(emptyList<Message>()) }
-    Data.getMessages(name, Data.getSavedUser(context)) { list ->
+    var messages by remember { mutableStateOf(emptyList<MessageClass>()) }
+    MessageData.MessagesGet(name, UserData.getUserSaved(context)) { list ->
         messages = list
     }
     Scaffold(containerColor = Color.White, topBar = {
@@ -99,8 +98,8 @@ fun ChatScreen(name: String, navController: NavController) {
                 modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
             ) {
                 IconButton(onClick = {
-                    Data.sendMessage(Data.getSavedUser(context), name, msg.text)
-                    Data.getMessages(name, Data.getSavedUser(context)) { list ->
+                    MessageData.MessagesSend(UserData.getUserSaved(context), name, msg.text)
+                    MessageData.MessagesGet(name, UserData.getUserSaved(context)) { list ->
                         messages = list
                     }
                     msg = TextFieldValue()
@@ -127,7 +126,7 @@ fun ChatScreen(name: String, navController: NavController) {
                         MessageItem(
                             msg = it1,
                             time = it2,
-                            position = item.from == Data.getSavedUser(context)
+                            position = item.from == UserData.getUserSaved(context)
                         )
                     }
                 }

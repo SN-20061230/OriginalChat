@@ -3,12 +3,8 @@ package com.example.chat_app.Screens
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.text.Layout.Alignment
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -16,7 +12,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,7 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Data
+import com.example.chat_app.Database.UserData
 import com.example.originalchat.Item
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -46,7 +41,7 @@ import com.example.originalchat.Item
 fun HomeScreen(navController: NavController) {
     var users by remember { mutableStateOf<List<String>>(emptyList()) }
     val context = LocalContext.current
-    Data.getUsers { list ->
+    UserData.UsersGet { list ->
         users = list
     }
 
@@ -67,11 +62,11 @@ fun HomeScreen(navController: NavController) {
                 )
 
             }
-            Text(text = "Current Username: " + Data.getSavedUser(context), color = Color.White, modifier = Modifier.padding(start = 70.dp, top = 10.dp))
+            Text(text = "Current Username: " + UserData.getUserSaved(context), color = Color.White, modifier = Modifier.padding(start = 70.dp, top = 10.dp))
 
         })
     }, bottomBar = {
-            BottomAppBar(containerColor = Color(40, 143, 238)) {
+            BottomAppBar(containerColor = Color(40, 143, 238), modifier = Modifier.height(70.dp)) {
 
 
 //                Row(modifier = Modifier.fillMaxWidth().height(80.dp)){

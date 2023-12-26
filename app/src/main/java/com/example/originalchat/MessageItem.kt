@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,8 +29,10 @@ fun MessageItem(msg: String, time: String, position: Boolean) {
             Column(horizontalAlignment = Alignment.End) {
                 Surface(
                     modifier = Modifier
+                        .clip(RoundedCornerShape(100.dp))
                         .background(Color(43, 72, 180), RoundedCornerShape(33))
-                        .padding(horizontal = 10.dp, vertical = 5.dp)
+                        .padding(horizontal = 12.dp, vertical = 7.dp),
+                    shape = RoundedCornerShape(22.dp),
                 ) {
                     Text(
                         modifier = Modifier.background(Color(43, 72, 180)),
@@ -49,9 +52,12 @@ fun MessageItem(msg: String, time: String, position: Boolean) {
             Column(horizontalAlignment = Alignment.Start) {
                 Surface(
                     modifier = Modifier
+                        .clip(RoundedCornerShape(100.dp))
                         .background(Color(40, 143, 238), RoundedCornerShape(33))
-                        .padding(horizontal = 10.dp, vertical = 5.dp)
-                ) {
+                        .padding(horizontal = 12.dp, vertical = 7.dp),
+
+                            shape = RoundedCornerShape(22.dp),
+                        ) {
                     Text(
                         modifier = Modifier.background(Color(40, 143, 238)),
                         fontSize = 25.sp,

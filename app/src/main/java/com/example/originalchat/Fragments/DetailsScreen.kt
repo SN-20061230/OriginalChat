@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -38,7 +37,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Data
+import com.example.chat_app.Database.UserData
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,12 +58,12 @@ fun DetailsScreen(navController: NavController) {
                         tint = Color.White,
                     )
                 }
-                Text(Data.getSavedUser(context), color = Color.White)
+                Text(UserData.getUserSaved(context), color = Color.White)
             }
         })
     },
         bottomBar = {
-            BottomAppBar(containerColor = Color(40, 143, 238)) {
+            BottomAppBar(containerColor = Color(40, 143, 238), modifier = Modifier.height(70.dp)) {
 
 
 //                Row(modifier = Modifier.fillMaxWidth().height(80.dp)){
@@ -120,7 +119,7 @@ fun DetailsScreen(navController: NavController) {
 
             )
             Button(modifier = Modifier.padding(top = 10.dp, start = 115.dp), onClick = {
-                Data.setPassword(Data.getSavedUser(context), password.text)
+                UserData.ChangePassword(UserData.getUserSaved(context), password.text)
                 Toast.makeText(context, "Password changed successfully", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "Change", fontSize = 20.sp)
@@ -128,7 +127,7 @@ fun DetailsScreen(navController: NavController) {
             Button(modifier = Modifier.padding(top = 5.dp,  start = 60.dp),
                 colors = ButtonDefaults.buttonColors(Color.Red),
                 onClick = {
-                    Data.saveUser(context, "")
+                    UserData.UserSave(context, "")
                     navController.navigate("SignIn")
                 }) {
                 Text(text = "Log out from system", fontSize = 20.sp)

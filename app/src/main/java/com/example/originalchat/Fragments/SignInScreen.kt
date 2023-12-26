@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.chat_app.Database.Data
+import com.example.chat_app.Database.UserData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,10 +89,10 @@ fun SignInScreen(navController: NavController) {
             shape = RoundedCornerShape(12.dp)
         )
         Button(modifier = Modifier.padding(top = 27.dp), onClick = {
-            Data.getUser(username, password) { result ->
+            UserData.UserGet(username, password) { result ->
                 Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                 if (result == "Successful Login") {
-                    Data.saveUser(context, username.text)
+                    UserData.UserSave(context, username.text)
                     navController.navigate("Home")
                 }
             }
